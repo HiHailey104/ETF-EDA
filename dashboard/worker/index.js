@@ -118,9 +118,9 @@ export default {
         const data = JSON.parse(text);
         const items = data?.result?.etfItemList;
         if (!Array.isArray(items)) throw new Error("Unexpected Naver API response");
-        return Response.json({ items, fetchedAt: new Date().toISOString() }, { headers: { "cache-control": "no-store" } });
+        return Response.json({ items, fetchedAt: new Date().toISOString() }, { headers: { "cache-control": "no-store", "access-control-allow-origin": "*" } });
       } catch (error) {
-        return Response.json({ error: "ETF data is temporarily unavailable" }, { status: 502, headers: { "cache-control": "no-store" } });
+        return Response.json({ error: "ETF data is temporarily unavailable" }, { status: 502, headers: { "cache-control": "no-store", "access-control-allow-origin": "*" } });
       }
     }
     if (url.pathname !== "/") return new Response("Not found", { status: 404 });
